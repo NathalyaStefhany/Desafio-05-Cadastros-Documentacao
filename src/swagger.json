@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Register Documentation",
+    "description": "This is an API register",
+    "version": "1.0.0",
+    "contact": {
+      "email": "nathalya.stefhay@hotmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create an user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" }
+                }
+              },
+              "example": {
+                "name": "Nathalya",
+                "email": "nathalya.stefhany@hotmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "admin": { "type": "boolean" },
+                    "created_at": { "type": "string" },
+                    "updated_at": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "id": "123456789",
+                  "name": "Nathalya",
+                  "email": "nathalya.stefhany@hotmail.com",
+                  "admin": false,
+                  "created_at": "2022-03-13T00:54:46.605Z",
+                  "updated_at": "2022-03-13T00:54:46.605Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User already exists!"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "List all users",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "name": { "type": "string" },
+                      "email": { "type": "string" },
+                      "admin": { "type": "boolean" },
+                      "created_at": { "type": "string" },
+                      "updated_at": { "type": "string" }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "123456789",
+                    "name": "Nathalya",
+                    "email": "nathalya.stefhany@hotmail.com",
+                    "admin": false,
+                    "created_at": "2022-03-13T00:54:46.605Z",
+                    "updated_at": "2022-03-13T00:54:46.605Z"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "User not exists or user isn't an admin!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user to admin",
+        "description": "Update an user to admin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "123456789"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "admin": { "type": "boolean" },
+                    "created_at": { "type": "string" },
+                    "updated_at": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "id": "123456789",
+                  "name": "Nathalya",
+                  "email": "nathalya.stefhany@hotmail.com",
+                  "admin": true,
+                  "created_at": "2022-03-13T00:54:46.605Z",
+                  "updated_at": "2022-03-13T00:54:46.605Z"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not exists!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get an user",
+        "description": "Get an user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "123456789"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "email": { "type": "string" },
+                    "admin": { "type": "boolean" },
+                    "created_at": { "type": "string" },
+                    "updated_at": { "type": "string" }
+                  }
+                },
+                "example": {
+                  "id": "123456789",
+                  "name": "Nathalya",
+                  "email": "nathalya.stefhany@hotmail.com",
+                  "admin": false,
+                  "created_at": "2022-03-13T00:54:46.605Z",
+                  "updated_at": "2022-03-13T00:54:46.605Z"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not exists!"
+          }
+        }
+      }
+    }
+  }
+}
